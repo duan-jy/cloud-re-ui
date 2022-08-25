@@ -1,32 +1,50 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <div class="debug" v-show="isDebug">在线调试模式已启用</div>
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
-
+<script>
+export default {};
+</script>
 <style lang="less">
+* {
+  font-family: "Noto Sans CJK SC";
+}
+html {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.46px;
+  text-align: left;
+  font-size: 16px;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  background-color: #e8e8eb;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  font-size: 16px;
+  height: 100%;
+  background: url("./assets/background.png") no-repeat;
+  background-size: 100% 100%;
+  .debug {
+    height: 25px;
+    text-align: center;
+    background-color: rgba(64, 255, 25, 0.6);
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10000;
   }
 }
 </style>
