@@ -13,6 +13,11 @@ const routes = [
     component: () => import("@/views/Login.vue"),
   },
   {
+    name: "history",
+    path: "/history",
+    component: () => import("@/views/History.vue"),
+  },
+  {
     path: "*",
     name: "404",
     component: () => import("@/views/features/404.vue"),
@@ -22,11 +27,6 @@ const routes = [
   //   path: "/",
   //   alias: "/index",
   //   component: () => import("@/views/index/index.vue"),
-  // },
-  // {
-  //   name: "historyRecords",
-  //   path: "/historyRecords",
-  //   component: () => import("@/views/historyRecords/index.vue"),
   // },
   // {
   //   name: "miv",

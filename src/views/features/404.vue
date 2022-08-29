@@ -56,7 +56,7 @@ export default {
 .wscn-http404 {
   position: relative;
   width: 100%;
-  padding: 0 50px;
+  padding: 0 30px;
   overflow: hidden;
   .pic-404 {
     position: relative;
@@ -171,8 +171,8 @@ export default {
   }
   .bullshit {
     position: relative;
-    width: calc(100% - 100px);
-    padding: 30px 0;
+    width: calc(100% - 60px);
+    padding: 30px 20px;
     overflow: hidden;
     &__oops {
       font-size: 32px;

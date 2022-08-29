@@ -67,11 +67,11 @@
     </div>
 
     <van-number-keyboard
-      :title="vanTabActive === 1 ? '请输入身份证后6位' : '请输入收到的验证码'"
+      extra-key="X"
       v-model="checkCode"
       :hide-on-click-outside="false"
-      extra-key="X"
       v-show="isSendedCode || (vanTabActive === 1 && requestIdReady)"
+      :title="vanTabActive === 1 ? '请输入身份证后6位' : '请输入收到的验证码'"
     />
     <Footer />
   </div>
@@ -229,8 +229,8 @@ export default {
           await this.$router.replace({
             name: "home",
             query: {
-              reg_id: data.reg_id,
-              hospital_code: data.org_code,
+              reg_id: reg_id,
+              hospital_code: hospital_code,
             },
           });
         }
@@ -252,7 +252,7 @@ export default {
   width: 100px;
 }
 ::v-deep(.van-tab__text--ellipsis) {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 ::v-deep(.van-button) {

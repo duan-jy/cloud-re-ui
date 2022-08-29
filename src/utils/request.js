@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Toast } from "vant";
 const service = axios.create({
   timeout: 20000,
   responseType: "json",
@@ -24,7 +25,7 @@ service.interceptors.response.use(
           ? "请求超时，请稍后"
           : res.message
         : "网络异常";
-      this.$message.error(msg);
+      Toast.fail(msg);
       return Promise.reject(new Error(msg || "Error"));
     } else {
       return res;
@@ -34,7 +35,7 @@ service.interceptors.response.use(
     let msg = error.message;
     msg =
       msg.indexOf("timeout") > -1 ? "请求超时，请稍后" : "网络异常请稍后重试";
-    this.$message.error(msg);
+    Toast.fail(msg);
     return Promise.reject(error.message);
   }
 );
