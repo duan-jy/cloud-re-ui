@@ -27,7 +27,7 @@ export default {
   transition: 0.4s;
   color: #e8e8e8;
   img {
-    width: 80%;
+    width: 65%;
   }
 }
 .logo_home {
@@ -39,7 +39,7 @@ export default {
   color: #e8e8e8;
   margin-top: 7%;
   img {
-    width: 80%;
+    width: 65%;
   }
 }
 </style>

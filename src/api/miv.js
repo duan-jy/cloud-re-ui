@@ -11,22 +11,22 @@ export function getImageWadouri(
   sopInstanceID
 ) {
   // const location = `${window.location.origin}`;
-  const location = `https://qiluhospital.medimage.online:8081`;
-  // const location = `https://medimage.online`;
+  // const location = `https://qiluhospital.medimage.online:8081`;
+  const location = `https://medimage.online`;
   return `wadouri:${location}/api/rs/wadouri?requestType=WADO&studyUID=${studyInstanceID}&seriesUID=${seriesInstanceID}&objectUID=${sopInstanceID}&contentType=application/dicom&transferSyntax=*`;
 }
 
 // 通过序列通过studyInstanceID,seriesInstanceID单个序列的所有图像值
 export function getImagesBySeriesID(studyInstanceID, seriesInstanceID) {
   return request({
-    url: `/rs/studies/${studyInstanceID}/series/${seriesInstanceID}/metadata`,
+    url: `/api/rs/studies/${studyInstanceID}/series/${seriesInstanceID}/metadata`,
     method: "GET",
   });
 }
 // 通过studyInstanceID 获取序列
 export function getSeriesByStudyInstanceID(studyInstanceID) {
   return request({
-    url: `/rs/studies/${studyInstanceID}/series`,
+    url: `/api/rs/studies/${studyInstanceID}/series`,
     method: "GET",
   });
 }
@@ -43,7 +43,7 @@ export async function getDicomMetaData(studyInstanceID) {
       const priority = [];
       let patientId = "";
       const response = await getSeriesByStudyInstanceID(studyInstanceID);
-      const seriesArrList = response.data;
+      const seriesArrList = response;
       console.log(seriesArrList);
       for (const item of seriesArrList) {
         const seriesInstanceID = item["0020000E"]["Value"][0];
@@ -54,7 +54,7 @@ export async function getDicomMetaData(studyInstanceID) {
           studyInstanceID,
           seriesInstanceID
         );
-        const sopArr = sopResponse.data || [];
+        const sopArr = sopResponse || [];
         sopArr.map((sop) => {
           const sopInstanceID = sop["00080018"]["Value"][0];
           if (patientId === "") {
