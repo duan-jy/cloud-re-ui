@@ -244,7 +244,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 ::v-deep(.van-tabs__nav) {
   background: transparent;
 }

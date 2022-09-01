@@ -12,7 +12,7 @@ export default {
   name: "Footer",
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 footer {
   position: fixed;
   bottom: 15px;

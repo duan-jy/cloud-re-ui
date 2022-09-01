@@ -8,7 +8,11 @@ import "@vant/touch-emulator";
 import Vant from "vant/es";
 import "vant/lib/index.css";
 Vue.use(Vant);
+import "ant-design-vue/dist/antd.css";
+import Antd from "ant-design-vue";
+Vue.use(Antd);
 
+import "./assets/miv-icon/iconfont.css";
 Vue.config.productionTip = false;
 
 new Vue({

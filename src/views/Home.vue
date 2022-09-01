@@ -46,7 +46,7 @@
             </div>
           </van-col>
           <van-col span="6">
-            <div class="category-type">
+            <div class="category-type" @click="imageJumpSkip">
               <img
                 class="category-image"
                 src="../assets/image/image.png"
@@ -95,21 +95,33 @@
         <div class="inspect">检查日期：{{ detail.studyTime }}</div>
       </div>
     </van-skeleton>
-    <van-popup v-model="share.show" round closeable>
+    <van-popup v-model="share.show" round style="width: 85%">
       <ShareComponent
-        :regID="detail.regId"
+        :regId="detail.regId"
         :orgCode="detail.orgCode"
         @close="changeShareMode"
         @complete="enterShareMode"
       />
     </van-popup>
+    <van-share-sheet
+      v-model="share.modalPanel"
+      title="立即分享给好友"
+      :options="share.options"
+      @select="selectShareMode"
+    />
+    <van-popup v-model="share.QRPanel" round>
+      <div v-if="share.QRPanel" id="qrCode" ref="qrCodeDOM">
+        <div v-show="share.password != ''">访问密码：{{ share.password }}</div>
+      </div>
+    </van-popup>
+    <textarea value="" id="textArea" />
   </div>
 </template>
 <script>
 import Logo from "@/components/logo.vue";
 import ShareComponent from "@/views/features/share.vue";
-import { getStudyInfo, downloadZip } from "@/api/home";
-import { DialogAlert } from "@/utils/common";
+import { getStudyInfo, downloadZip, getViewerUrl } from "@/api/home";
+import QRCode from "qrcode";
 export default {
   components: { Logo, ShareComponent },
   data() {
@@ -125,6 +137,11 @@ export default {
         show: false,
         password: "",
         modalPanel: false,
+        QRPanel: false,
+        options: [
+          { name: "复制链接", icon: "link" },
+          { name: "二维码", icon: "qrcode" },
+        ],
       },
     };
   },
@@ -138,7 +155,11 @@ export default {
         this.backOff("getStudyInfo ret != 0");
         return;
       }
-      this.$set(this, "detail", response.data);
+      this.$set(this, "detail", {
+        regId: reg_id,
+        orgCode: hospital_code,
+        ...response.data,
+      });
       this.$set(this, "complete", true);
     } catch (error) {}
   },
@@ -156,8 +177,27 @@ export default {
         },
       });
     },
+    // 影像跳转
+    async imageJumpSkip() {
+      const regId = this.$route.query.reg_id;
+      const orgCode = this.$route.query.hospital_code;
+      const response = await getViewerUrl(regId, orgCode);
+      if (response.error != 0) {
+        this.$toast({
+          message: response.error,
+          position: "bottom",
+        });
+      } else {
+        this.$toast({
+          message: "加载中",
+          position: "bottom",
+        });
+        window.location.href = response.data.url;
+      }
+    },
     // 进入分享模式（1.选择分享模式 2.显示相关DOM）
     enterShareMode(url, password) {
+      this.$toast.clear();
       this.$set(this.share, "url", url);
       this.$set(this.share, "password", password);
       this.$set(this.share, "modalPanel", true);
@@ -200,10 +240,49 @@ export default {
           });
         });
     },
+    // 显示分享模式选择事件
+    selectShareMode(option, index) {
+      if (index === 0) {
+        this.shareCopyText();
+      } else {
+        this.shareQRCode();
+      }
+      this.$toast({
+        message: "为了保护您的隐私，请确认对方身份",
+        position: "bottom",
+      });
+      this.$set(this.share, "modalPanel", false);
+    },
+    shareCopyText() {
+      this.$nextTick(() => {
+        const dom = document.getElementById("textArea");
+        dom.value = `链接：${this.share.url}`;
+        if (this.share.password !== "") {
+          dom.value += ` 提取码：${this.share.password}`;
+        }
+        console.log(dom);
+        dom.select();
+        document.execCommand("Copy");
+        this.$toast.success("链接已成功复制到剪贴板");
+      });
+    },
+    shareQRCode() {
+      this.$set(this.share, "QRPanel", true);
+      this.$nextTick(() => {
+        const options = {
+          errorCorrectionLevel: "H",
+          width: 230,
+          margin: 4,
+        };
+        QRCode.toCanvas(this.share.url, options, (err, canvas) => {
+          this.$refs.qrCodeDOM.appendChild(canvas);
+        });
+      });
+    },
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .key-title {
   color: #38b69b;
   font-weight: 700;
@@ -227,6 +306,12 @@ export default {
   color: #747171;
   background: url("../assets/home-bg.png");
   background-size: 100% 100%;
+  #textArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
   .module-info {
     box-sizing: border-box;
     width: 94%;

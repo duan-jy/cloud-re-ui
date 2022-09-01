@@ -1,5 +1,6 @@
+const path = require("path");
 module.exports = {
-  publicPath: "./",
+  publicPath: "/",
   lintOnSave: false,
   productionSourceMap: false,
   filenameHashing: true,
@@ -15,14 +16,38 @@ module.exports = {
           "^/api": "api",
         },
       },
-      "/viewer": {
-        //虚拟目录
-        target: "http://127.0.0.1:3000", //地址
-        changeOrigin: true,
-        pathRewrite: {
-          "^/viewer": "",
-        },
-      },
     },
   },
+  configureWebpack: (config) => {
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        "@": resolve("src"),
+        "cornerstone-wado-image-loader":
+          "cornerstone-wado-image-loader/dist/dynamic-import/cornerstoneWADOImageLoader.min.js",
+      },
+    };
+    //线上环境
+    if (process.env.NODE_ENV === "production") {
+      console.log("这是生产模式");
+    }
+    if (process.env.NODE_ENV === "development") {
+      console.log("开发模式");
+    }
+  },
+  chainWebpack: (config) => {
+    config.module
+      .rule("shaderloader")
+      .include.add(/vtk\.js[\/\\]Sources/)
+      .end()
+      .test(/\.glsl$/)
+      .use("shader-loader")
+      .loader("shader-loader")
+      .end();
+    return config;
+  },
 };
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}

@@ -9,7 +9,7 @@
 <script>
 export default {};
 </script>
-<style lang="less">
+<style lang="scss">
 * {
   font-family: "Noto Sans CJK SC";
 }

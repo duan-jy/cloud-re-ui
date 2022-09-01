@@ -1,6 +1,6 @@
 <template>
   <div :class="isHome ? 'logo_home' : 'logo'">
-    <img src="../assets/image/qlicon.png" />
+    <img src="../assets/image/defaultlogo.png" />
   </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .logo {
   width: 100%;
   height: 90px;

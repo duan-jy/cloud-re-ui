@@ -163,7 +163,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 ::v-deep(.van-nav-bar__content) {
   background-color: #38b69b;
   .van-icon,

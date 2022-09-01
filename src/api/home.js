@@ -16,3 +16,9 @@ export function downloadZip(regId, hospitalCode) {
     method: "get",
   });
 }
+export function getViewerUrl(regId, orgCode) {
+  return request({
+    url: `/api/viewer/${regId}/${orgCode}`,
+    method: "get",
+  });
+}
