@@ -27,7 +27,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "./loading.scss";
+@import "../mpr/components/loading.scss";
 ul li {
   list-style: none;
 }
