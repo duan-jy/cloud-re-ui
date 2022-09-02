@@ -1,6 +1,6 @@
 <template>
   <div class="report-container">
-    <img class="logo" alt="logo" src="@/assets/logo.png" />
+    <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" />
     <div class="header">
       <button @click="openMivOnline">在线查看影像</button>
       <button @click="openAbout">关于</button>
@@ -84,7 +84,7 @@
     position: fixed;
     top: 20px;
     left: 20px;
-    width: 140px;
+    width: 200px;
   }
   button {
     height: 35px;
@@ -197,7 +197,7 @@
 }
 </style>
 <script>
-import { getStudyInfo } from "@/api/home";
+import { getStudyInfo, getViewerUrl } from "@/api/home";
 import { saveReport } from "@/api/report";
 export default {
   data() {
@@ -241,7 +241,22 @@ export default {
         this.$toast({ message: "保存失败", position: "center" });
       }
     },
-    openMivOnline() {},
+    async openMivOnline() {
+      const { regId, orgCode } = this.$route.query;
+      const response = await getViewerUrl(regId, orgCode);
+      if (response.error != 0) {
+        this.$toast({
+          message: response.error,
+          position: "bottom",
+        });
+      } else {
+        this.$toast({
+          message: "加载中",
+          position: "bottom",
+        });
+        window.location.href = response.data.url;
+      }
+    },
   },
 };
 </script>

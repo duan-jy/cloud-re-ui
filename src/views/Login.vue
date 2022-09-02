@@ -261,7 +261,6 @@ export default {
   margin: 10px auto;
   border: 0px;
   background-color: #2cb396;
-  margin-left: 10%;
 }
 ::v-deep(.van-password-input__item) {
   font-weight: 600;

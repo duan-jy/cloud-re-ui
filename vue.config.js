@@ -36,6 +36,11 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
+    config.set("name", "图灵医道云胶片");
+    config.plugin("html").tap((args) => {
+      args[0].title = "图灵医道云胶片";
+      return args;
+    });
     config.module
       .rule("shaderloader")
       .include.add(/vtk\.js[\/\\]Sources/)

@@ -1,6 +1,6 @@
 <template>
   <div class="pc-container">
-    <img class="logo" alt="logo" src="@/assets/logo.png" />
+    <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" />
     <div class="header">
       <h1>图灵医道云胶片</h1>
       <h2>智慧医院 影像先行</h2>
@@ -49,6 +49,7 @@ export default {
 .pc-container {
   .logo {
     margin: 20px;
+    width: 200px;
   }
   .header {
     position: fixed;

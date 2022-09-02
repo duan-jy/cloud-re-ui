@@ -10,9 +10,9 @@ export function getImageWadouri(
   seriesInstanceID,
   sopInstanceID
 ) {
-  // const location = `${window.location.origin}`;
+  const location = `${window.location.origin}`;
   // const location = `https://qiluhospital.medimage.online:8081`;
-  const location = `https://medimage.online`;
+  // const location = `https://medimage.online`;
   return `wadouri:${location}/api/rs/wadouri?requestType=WADO&studyUID=${studyInstanceID}&seriesUID=${seriesInstanceID}&objectUID=${sopInstanceID}&contentType=application/dicom&transferSyntax=*`;
 }
 

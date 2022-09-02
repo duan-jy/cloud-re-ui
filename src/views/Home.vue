@@ -210,8 +210,15 @@ export default {
         this.$toast.fail("未包含必要参数，无法下载");
         return;
       }
+      this.$toast.loading({
+        message: "下载中...",
+        closeOnClickOverlay: true,
+        duration: 0,
+        overlay: true,
+      });
       downloadZip(regId, hospitalCode)
         .then((data) => {
+          this.$toast.clear();
           const url = URL.createObjectURL(data);
           const a = document.createElement("a");
           a.href = url; // 给a标签赋上下载地址
@@ -221,6 +228,7 @@ export default {
           URL.revokeObjectURL(a.href);
         })
         .catch((err) => {
+          this.$toast.clear();
           // DialogAlert("下载图像失败->" + err);
         });
       // window.open(`/api/download/${regId}/${hospitalCode}`);
