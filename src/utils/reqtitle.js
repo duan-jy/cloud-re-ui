@@ -8,7 +8,7 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     config.method = config.method.toLowerCase();
-    config.baseURL = "http://10.68.12.1:8288/data";
+    config.baseURL = "http://36.138.44.14:27021/data";
     return config;
   },
   (err) => {

@@ -30,6 +30,7 @@ export default {
         });
       }
     } catch (e) {
+      this.$store.dispatch("app/setObtainConfig", true);
       console.log(e);
     }
   },

@@ -4,7 +4,7 @@ export function getByHospitalId(HospitalId) {
     url: "/api/appConfig/getByHospitalId",
     method: "get",
     params: {
-      HospitalId: "266799001",
+      HospitalId,
     },
   });
 }
