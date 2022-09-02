@@ -1,6 +1,7 @@
 <template>
   <div class="report-container">
-    <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" />
+    <!-- <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" /> -->
+    <Logo :isPc="true" />
     <div class="header">
       <button @click="openMivOnline">在线查看影像</button>
       <button @click="openAbout">关于</button>
@@ -197,9 +198,13 @@
 }
 </style>
 <script>
+import Logo from "@/components/logo.vue";
 import { getStudyInfo, getViewerUrl } from "@/api/home";
 import { saveReport } from "@/api/report";
 export default {
+  components: {
+    Logo,
+  },
   data() {
     return {
       reportContent: "",

@@ -1,15 +1,32 @@
 <template>
-  <div :class="isHome ? 'logo_home' : 'logo'">
-    <img src="../assets/image/defaultlogo.png" />
+  <div :class="isHome ? 'logo_home' : isPc ? 'logo_pc' : 'logo'">
+    <img :src="imageLogo" />
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import imgLogo from "../assets/image/defaultlogo.png";
 export default {
   name: "Logo",
   props: {
     isHome: {
       type: Boolean,
       default: false,
+    },
+    isPc: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      imgLogo,
+    };
+  },
+  computed: {
+    ...mapGetters(["config"]),
+    imageLogo() {
+      return this.config.logoUrl || this.imgLogo;
     },
   },
 };
@@ -27,7 +44,16 @@ export default {
   transition: 0.4s;
   color: #e8e8e8;
   img {
-    width: 65%;
+    width: 70%;
+  }
+}
+.logo_pc {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  img {
+    width: 100%;
   }
 }
 .logo_home {
@@ -39,7 +65,7 @@ export default {
   color: #e8e8e8;
   margin-top: 7%;
   img {
-    width: 65%;
+    width: 70%;
   }
 }
 </style>

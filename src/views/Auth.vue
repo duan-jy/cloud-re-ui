@@ -67,6 +67,10 @@ export default {
         let hospital = query.hospital_code;
         let id_card = query.id_card;
         let phone_number = query.phone_number;
+        let isArea = query.isArea;
+        if (isArea == 1) {
+          hospital = query.hospitalCode;
+        }
         // 解密数据
         let response = await authDecrypt(phone_number, id_card);
         if (response.error != 0 || response.hospital == "") {

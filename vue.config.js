@@ -11,6 +11,7 @@ module.exports = {
       "/api": {
         //虚拟目录
         target: "https://medimage.online", //地址
+        // target: "http://10.68.12.1:8288/data", //地址
         changeOrigin: true,
         pathRewrite: {
           "^/api": "api",

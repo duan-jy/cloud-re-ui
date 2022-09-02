@@ -1,8 +1,9 @@
 <template>
   <div class="pc-container">
-    <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" />
+    <!-- <img class="logo" alt="logo" src="@/assets/image/defaultlogo.png" /> -->
+    <Logo :isPc="true" />
     <div class="header">
-      <h1>图灵医道云胶片</h1>
+      <h1>{{ config.title || "图灵医道云胶片" }}</h1>
       <h2>智慧医院 影像先行</h2>
     </div>
     <div class="main">
@@ -20,12 +21,18 @@
   </div>
 </template>
 <script>
+import Logo from "@/components/logo.vue";
 import { postAuthFf } from "@/api/pc";
+import { mapGetters } from "vuex";
 export default {
+  components: { Logo },
   data() {
     return {
       authCode: "",
     };
+  },
+  computed: {
+    ...mapGetters(["config"]),
   },
   methods: {
     async authSubmit() {

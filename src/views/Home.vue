@@ -27,8 +27,8 @@
           <van-col span="12" class="text-right key-title">检查部位</van-col>
         </van-row>
         <van-row class="pd-5">
-          <van-col span="12" class="text-left"> {{ detail.modality }}</van-col>
-          <van-col span="12" class="text-right">
+          <van-col span="9" class="text-left"> {{ detail.modality }}</van-col>
+          <van-col span="15" class="text-right">
             {{ detail.studyBodypart }}
           </van-col>
         </van-row>
