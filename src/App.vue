@@ -7,38 +7,7 @@
   </div>
 </template>
 <script>
-import { getByHospitalId } from "@/api/app";
-import { mapGetters } from "vuex";
-export default {
-  computed: {
-    ...mapGetters(["isObtainConfig"]),
-  },
-  async updated() {
-    try {
-      if (this.isObtainConfig) return;
-      const { hospital_code, orgCode } = this.$route.query;
-      const response = await getByHospitalId(hospital_code || orgCode);
-      if (response.success) {
-        this.$store.dispatch("app/setObtainConfig", true);
-        const { title, logoUrl } = response.data;
-        if (title) {
-          document.title = title;
-        }
-        this.$store.dispatch("app/setConfig", {
-          logoUrl,
-          title,
-        });
-      }
-    } catch (e) {
-      this.$store.dispatch("app/setObtainConfig", true);
-      console.log(e);
-    }
-  },
-
-  beforeRouteEnter(e) {
-    console.log(e);
-  },
-};
+export default {};
 </script>
 <style lang="scss">
 * {
