@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 import imgLogo from "../assets/image/defaultlogo.png";
 export default {
   name: "Logo",
@@ -24,9 +23,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["config"]),
     imageLogo() {
-      return this.config.logoUrl || this.imgLogo;
+      return this.imgLogo;
     },
   },
 };
