@@ -38,8 +38,8 @@ const routes = [
     component: () => import("@/views/Share.vue"),
   },
   {
-    name: "miv",
-    path: "/miv",
+    name: "webmiv",
+    path: "/webmiv",
     component: () => import("@/views/Miv.vue"),
   },
   {

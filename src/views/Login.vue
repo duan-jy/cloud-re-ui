@@ -189,7 +189,7 @@ export default {
         if (!data.id_card) {
           const idCardStatus = {
             error: true,
-            content: "无法通过手机号登陆，未找到相关手机号信息",
+            content: "无法通过身份证号登陆，未找到相关身份证号信息",
           };
           this.$set(this, "idCardStatus", idCardStatus);
         } else {
