@@ -8,7 +8,9 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     config.method = config.method.toLowerCase();
-    config.baseURL = "http://36.138.44.14:27021/data";
+    // config.baseURL = "https://36.138.42.236:10011/data";
+    config.baseURL = `${window.location.protocol}//${window.location.hostname}/data`;
+    // config.baseURL = "https://medimage.online/data";
     return config;
   },
   (err) => {

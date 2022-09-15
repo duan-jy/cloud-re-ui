@@ -20,6 +20,7 @@ export default {
       const response = await getByHospitalId(hospital_code || orgCode);
       if (response.success) {
         this.$store.dispatch("app/setObtainConfig", true);
+        if (!response.data) return;
         const { title, logoUrl } = response.data;
         if (title) {
           document.title = title;
@@ -31,7 +32,6 @@ export default {
       }
     } catch (e) {
       this.$store.dispatch("app/setObtainConfig", true);
-      console.log(e);
     }
   },
 
