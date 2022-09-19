@@ -1,7 +1,7 @@
-import request from "@/utils/reqtitle";
+import request from "@/utils/request";
 export function getByHospitalId(HospitalId) {
   return request({
-    url: `/api/appConfig/getByHospitalId?HospitalId=${HospitalId}`,
+    url: `/data/api/appConfig/getByHospitalId?HospitalId=${HospitalId}`,
     method: "get",
   });
 }

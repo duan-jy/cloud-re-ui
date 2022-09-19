@@ -94,6 +94,18 @@
         <div class="report">报告日期：{{ detail.submitTime }}</div>
         <div class="inspect">检查日期：{{ detail.studyTime }}</div>
       </div>
+      <div class="modal-container">
+        <div class="modal-title">云电子胶片及报告系统软件</div>
+        <div class="modal-content">规格/型号：TuRing_CloudFilm</div>
+        <div class="modal-content">软件完整版本：V1.0.0.0</div>
+        <div class="modal-content">软件发布版本：V1</div>
+        <div class="modal-content">
+          生产企业：图灵医道医疗器械科技（上海）有限公司
+        </div>
+        <div class="modal-content">
+          生产地址：中国（上海）自由贸易试验区申江路5709号、秋月路26号1幢3层F室
+        </div>
+      </div>
     </van-skeleton>
     <van-popup v-model="share.show" round style="width: 85%">
       <ShareComponent
@@ -415,10 +427,26 @@ export default {
     margin: 2px;
     .report,
     .inspect {
-      font-size: 13px;
+      font-size: 14px;
       padding: 2px 0;
       color: white;
     }
+  }
+}
+.modal-container {
+  color: #ddd;
+  font-size: 12px;
+  margin: 10px 10px 20px 10px;
+  position: relative;
+  border: 1px dotted #6ffcde;
+  padding: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+  .modal-title {
+    background: #2cb396;
+    position: absolute;
+    top: -10px;
+    left: 10px;
   }
 }
 </style>

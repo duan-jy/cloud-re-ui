@@ -9,8 +9,8 @@ service.interceptors.request.use(
   (config) => {
     config.method = config.method.toLowerCase();
     // config.baseURL = "https://36.138.42.236:10011/data";
-    config.baseURL = `${window.location.protocol}//${window.location.hostname}/data`;
-    // config.baseURL = "https://medimage.online/data";
+    // config.baseURL = `${window.location.protocol}//${window.location.hostname}/data`;
+    config.baseURL = "https://medimage.online/data";
     return config;
   },
   (err) => {

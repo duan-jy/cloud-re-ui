@@ -24,7 +24,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["config"]),
+    ...mapGetters(["config", "isObtainConfig"]),
     imageLogo() {
       return this.config.logoUrl || this.imgLogo;
     },

@@ -16,12 +16,18 @@ export default {
   async updated() {
     try {
       if (this.isObtainConfig) return;
-      const { hospital_code, orgCode } = this.$route.query;
+      let { hospital_code, orgCode } = this.$route.query;
+      if (!orgCode && !hospital_code) return;
       const response = await getByHospitalId(hospital_code || orgCode);
       if (response.success) {
         this.$store.dispatch("app/setObtainConfig", true);
         if (!response.data) return;
-        const { title, logoUrl } = response.data;
+        let { title, logoUrl } = response.data;
+        logoUrl = logoUrl.replace(
+          "http://36.138.42.236:8188",
+          // `${window.location.protocol}//${window.location.hostname}`
+          `https://medimage.online`
+        );
         if (title) {
           document.title = title;
         }
