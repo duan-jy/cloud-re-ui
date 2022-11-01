@@ -48,8 +48,8 @@
         <hr />
         <a-row>
           <a-col class="item" :span="24" style="fontweight: '400'">
-            注：此报告仅供参考，以院内打印纸质报告为准</a-col
-          >
+            注：此报告仅供参考，以院内打印纸质报告为准
+          </a-col>
         </a-row>
       </div>
       <div class="write">
@@ -73,195 +73,197 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.report-container {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  hr {
-    border-color: #e6e6e6;
+  .report-container {
     width: 100%;
-  }
-  .logo {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 200px;
-  }
-  button {
-    height: 35px;
-    padding: 0px 23px;
-    background-color: #15b895;
-    color: #fff;
-    font-size: 13px;
-    border: 0px;
-    border-radius: 5px;
-    margin-left: 15px;
-    cursor: pointer;
-    min-width: 90px;
-  }
-  .header {
-    box-sizing: border-box;
-    background: transparent;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-  }
-  .main {
-    width: 100%;
-    height: calc(100% - 65px);
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-
-    .title {
+    height: 100%;
+    padding: 20px;
+    hr {
+      border-color: #e6e6e6;
       width: 100%;
-      font-size: 25px;
-      color: #1faa8c;
-      font-weight: 700;
     }
-
-    .report {
-      // 左侧报告部分
-      padding: 20px;
-      display: inline-block;
-      width: 730px;
-      height: 100%;
-      background-color: #fff;
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 200px;
     }
-
-    h1 {
-      text-align: center;
-      color: #333;
-      font-weight: 600;
-      font-size: 35px;
-      margin-top: 10px;
+    button {
+      height: 35px;
+      padding: 0px 23px;
+      background-color: #15b895;
+      color: #fff;
+      font-size: 13px;
+      border: 0px;
+      border-radius: 5px;
+      margin-left: 15px;
+      cursor: pointer;
+      min-width: 90px;
     }
-
-    h2 {
-      color: #333;
-      font-weight: 600;
-      font-size: 18px;
-      margin-top: 10px;
-    }
-
-    .content {
-      min-height: 53%;
-    }
-
-    .item {
-      color: #333333;
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .value {
-      color: #333333;
-      font-weight: 400;
-      text-align: left;
-    }
-
-    .ant-a-row {
-      margin-bottom: 8px;
-    }
-
-    .write {
-      // 右侧书写报告部分
-      padding: 20px;
-      display: inline-block;
-      width: calc(100% - 730px - 10px);
-      height: 100%;
-      background-color: #fff;
+    .header {
+      box-sizing: border-box;
+      background: transparent;
+      width: 100%;
+      height: 50px;
       display: flex;
-      flex-direction: column;
-    }
-
-    textarea {
-      color: #999;
-      height: 90%;
-      resize: none;
-      outline: none;
-    }
-
-    textarea:hover {
-      background-color: #efefef;
-      color: #000;
-    }
-
-    .operate {
-      display: flex;
+      align-items: flex-end;
       justify-content: flex-end;
+      margin-bottom: 15px;
+    }
+    .main {
+      width: 100%;
+      height: calc(100% - 65px);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+
+      .title {
+        width: 100%;
+        font-size: 25px;
+        color: #1faa8c;
+        font-weight: 700;
+      }
+
+      .report {
+        // 左侧报告部分
+        padding: 20px;
+        display: inline-block;
+        width: 730px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #fff;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        font-size: 35px;
+        margin-top: 10px;
+      }
+
+      h2 {
+        color: #333;
+        font-weight: 600;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+
+      .content {
+        min-height: 53%;
+      }
+
+      .item {
+        color: #333333;
+        font-weight: 700;
+        text-align: right;
+      }
+
+      .value {
+        color: #333333;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      .ant-a-row {
+        margin-bottom: 8px;
+      }
+
+      .write {
+        // 右侧书写报告部分
+        padding: 20px;
+        display: inline-block;
+        width: calc(100% - 730px - 10px);
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+      }
+
+      textarea {
+        color: #999;
+        height: 90%;
+        resize: none;
+        outline: none;
+      }
+
+      textarea:hover {
+        background-color: #efefef;
+        color: #000;
+      }
+
+      .operate {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
-}
 </style>
 <script>
-import Logo from "@/components/logo.vue";
-import { getStudyInfo, getViewerUrl } from "@/api/home";
-import { saveReport } from "@/api/report";
-export default {
-  components: {
-    Logo,
-  },
-  data() {
-    return {
-      reportContent: "",
-      detailed: {},
-    };
-  },
-  async created() {
-    try {
-      const { regId, orgCode } = this.$route.query;
-      const { data } = await getStudyInfo(regId, orgCode);
-      this.$set(this, "detailed", data);
-      if (data.onlineReport) {
-        this.report = data.onlineReport.report;
-      }
-    } catch (e) {
-      this.$toast({ message: "分享码已失效", position: "center" });
-      this.$router.push("/pc");
-      console.error(e);
-    }
-  },
-  methods: {
-    openAbout() {
-      this.$toast({ message: "图灵医道提供技术支持", position: "center" });
+  import Logo from '@/components/logo.vue'
+  import { getStudyInfo, getViewerUrl } from '@/api/home'
+  import { saveReport } from '@/api/report'
+  export default {
+    components: {
+      Logo,
     },
-    goBack() {
-      this.$router.push("/pc");
-    },
-    async saveReportEdit() {
-      const { regId, orgCode } = this.$route.query;
-      const params = {
-        report: this.reportContent,
-        regId,
-        orgCode,
-      };
-      const data = await saveReport(params);
-      if (data.error == 0) {
-        this.$toast({ message: "保存成功", position: "center" });
-      } else {
-        this.$toast({ message: "保存失败", position: "center" });
+    data() {
+      return {
+        reportContent: '',
+        detailed: {},
       }
     },
-    async openMivOnline() {
-      const { regId, orgCode } = this.$route.query;
-      const response = await getViewerUrl(regId, orgCode);
-      if (response.error != 0) {
-        this.$toast({
-          message: response.error,
-          position: "bottom",
-        });
-      } else {
-        this.$toast({
-          message: "加载中",
-          position: "bottom",
-        });
-        window.location.href = response.data.url;
+    async created() {
+      try {
+        const { regId, orgCode } = this.$route.query
+        const { data } = await getStudyInfo(regId, orgCode)
+        this.$set(this, 'detailed', data)
+        if (data.onlineReport) {
+          this.report = data.onlineReport.report
+        }
+      } catch (e) {
+        this.$toast({ message: '分享码已失效', position: 'center' })
+        this.$router.push('/pc')
+        console.error(e)
       }
     },
-  },
-};
+    methods: {
+      openAbout() {
+        this.$toast({ message: '图灵医道提供技术支持', position: 'center' })
+      },
+      goBack() {
+        this.$router.push('/pc')
+      },
+      async saveReportEdit() {
+        const { regId, orgCode } = this.$route.query
+        const params = {
+          report: this.reportContent,
+          regId,
+          orgCode,
+        }
+        const data = await saveReport(params)
+        if (data.error == 0) {
+          this.$toast({ message: '保存成功', position: 'center' })
+        } else {
+          this.$toast({ message: '保存失败', position: 'center' })
+        }
+      },
+      async openMivOnline() {
+        const { regId, orgCode } = this.$route.query
+        const response = await getViewerUrl(regId, orgCode)
+        if (response.error != 0) {
+          this.$toast({
+            message: response.error,
+            position: 'bottom',
+          })
+        } else {
+          this.$toast({
+            message: '加载中',
+            position: 'bottom',
+          })
+          window.location.href = response.data.url
+        }
+      },
+    },
+  }
 </script>
