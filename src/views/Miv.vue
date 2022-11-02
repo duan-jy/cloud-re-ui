@@ -477,7 +477,7 @@ export default {
         // 判断是否是移动端
         this.dragSeries = seriesId;
       } else {
-        evt.preventDefault();
+        // evt.preventDefault();
         console.log("这里是pc端");
         return;
       }
@@ -499,7 +499,7 @@ export default {
           seriesLength,
         });
       } else {
-        evt.preventDefault();
+        // evt.preventDefault();
         console.log("这里是pc端");
         return;
       }
@@ -557,7 +557,7 @@ export default {
       this.$set(this.viewMsgDesc, elementId, { ...imageDataSet, seriesLength });
     },
     allowDropdown(e) {
-      e.preventDefault();
+      // e.preventDefault();
     },
     async getDicomData(studyId) {
       this.loading = true;
@@ -776,13 +776,14 @@ export default {
      * 图像监听事件
      */
     mouseClick(evt) {
-      evt.preventDefault();
+      console.log(evt)
+      // evt.preventDefault();
     },
     mouseWheel(evt) {
-      evt.preventDefault();
+      // evt.preventDefault();
     },
     mouseDrag(evt) {
-      evt.preventDefault();
+      // evt.preventDefault();
     },
     mouseMove(evt) {
       const elmentId = evt.target.id;
@@ -830,7 +831,6 @@ export default {
     },
     // 更新当前属性值
     changeAttrValue(key, value) {
-      console.log(key, value);
       this.$set(this, key, value);
     },
     // 初始化异步标准线

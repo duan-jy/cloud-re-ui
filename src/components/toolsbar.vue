@@ -565,9 +565,6 @@ export default {
     automaticDrag(item) {
       this.activeAutoDrag = item;
     },
-    AllowDrop(e) {
-      e.preventDefault();
-    },
     SeriesDrop(e, isMore, isAuto) {
       if (isAuto || this.activeDragTool === "") {
         this.$set(

@@ -52,7 +52,7 @@
           </a-col>
         </a-row>
       </div>
-      <div class="write">
+      <!-- <div class="write">
         <div class="title">书写会诊意见</div>
         <hr />
         <a-textarea
@@ -68,7 +68,8 @@
             返回
           </button>
         </div>
-      </div>
+      </div> -->
+
     </div>
   </div>
 </template>
@@ -127,7 +128,7 @@
         // 左侧报告部分
         padding: 20px;
         display: inline-block;
-        width: 730px;
+        width: 100%;
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
