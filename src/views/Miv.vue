@@ -559,90 +559,68 @@ export default {
     allowDropdown(e) {
       // e.preventDefault();
     },
+    // 获取前端Dicom数据
     async getDicomData(studyId) {
       this.loading = true;
-      this.$set(this, "wholeImages", []);
-      const dataList = this.wholeImages || [];
+      const dataList = this.wholeImages;
       try {
-        const { imageIds, aImageIdObj, priority, patientId } =
-          await getDicomMetaData(studyId);
-        // document.title = patientId;
-        this.$set(this, "activePatientId", patientId);
+        const { imageIds, aImageIdObj, priority } = await getDicomMetaData(
+          studyId
+        );
+        const bkImageIdObj = { ...aImageIdObj };
         if (imageIds.length === 0) {
           this.loading = false;
           this.$message.error("服务器暂无图像数据");
           return;
         }
-        // this.$set(this, 'activeSeries', Object.keys(aImageIdObj)[0])
-        // this.activePatientIndex = `${dataList.length}`
-        const ignoreImageIds = [];
-        let isAutoShow = true;
         for (const imageObject of priority) {
-          try {
-            const imageOriginalData = await loadCacheImage(imageObject.imageId);
-            imageObject.imageIds = aImageIdObj[imageObject.seriesInstanceID];
-            createMetadata(imageObject, imageOriginalData, dataList);
-            this.$nextTick(async () => {
-              if (this.loading) this.loading = false;
-              this.thumbnailShow();
-              if (isAutoShow) {
-                isAutoShow = false;
-                this.activeSeries = imageObject.seriesInstanceID;
-                const { imageDataSet, seriesLength } = await this.setStack(
-                  document.getElementById(this.activeElement)
-                );
-                this.$set(this.viewMsgDesc, this.activeElement, {
-                  ...imageDataSet,
-                  seriesLength,
-                });
-              }
-            });
-          } catch (e) {
-            continue;
-          }
+          const imageOriginalData = await loadCacheImage(imageObject.imageId);
+          imageObject.imageIds = aImageIdObj[imageObject.seriesInstanceID];
+          createMetadata(imageObject, imageOriginalData, dataList);
+          this.$nextTick(() => {
+            this.thumbnailShow();
+          });
         }
-        for (const series in aImageIdObj) {
-          const seriesImageIds = aImageIdObj[series];
-          for (const imageId of seriesImageIds) {
-            try {
-              if (this.activeSeries === series) {
-                await this.updateDesc(seriesImageIds);
-              }
-              const { patientId: patientIdPart } =
-                this.elementToPart[this.activeElement] || {};
-              if (
-                this.activeSeries &&
-                this.activeSeries !== series &&
-                patientId === patientIdPart
-              ) {
-                ignoreImageIds.push(imageId);
-                continue;
-              }
-              const imageOriginalData = await loadCacheImage(imageId);
-              createMetadata(imageId, imageOriginalData, dataList);
-            } catch (e) {
-              console.log(e);
-              continue;
-            }
-          }
-        }
-        for (const imageId of ignoreImageIds) {
-          try {
-            const imageOriginalData = await loadCacheImage(imageId);
-            createMetadata(imageId, imageOriginalData, dataList);
-          } catch (e) {
-            console.log(e);
-            continue;
-          }
-        }
-        if (this.activeSeries) {
-          this.updateDesc(aImageIdObj[this.activeSeries]);
-        }
+        if (this.loading) this.loading = false;
+        this.activePatientIndex = `${dataList.length - 1}`;
+        await this.getDicomImage(aImageIdObj, dataList, bkImageIdObj);
         this.$message.success("图像加载完成");
       } catch (e) {
         console.log(e);
         this.loading = false;
       }
+    },
+    // 递归按顺序进行前端显示
+    async getDicomImage(aImageIdObj, dataList, aImageId) {
+      // return new Promise(async resolve => {
+      for (const series in aImageIdObj) {
+        const seriesImageIds = JSON.parse(JSON.stringify(aImageIdObj[series]));
+        if (seriesImageIds.length === 0) continue;
+        for (const imageId of seriesImageIds) {
+          if (
+            this.activeSeries &&
+            this.activeSeries !== series &&
+            aImageIdObj[this.activeSeries].length !== 0
+          ) {
+            continue;
+          }
+          const imageOriginalData = await loadCacheImage(imageId);
+          createMetadata(imageId, imageOriginalData, dataList);
+          aImageIdObj[series].shift();
+          if (this.activeSeries === series) {
+            await this.updateDesc(seriesImageIds);
+          }
+        }
+      }
+      let count = 0;
+      for (const key in aImageIdObj) {
+        count += aImageIdObj[key].length;
+      }
+      if (count) {
+        await this.getDicomImage(aImageIdObj, dataList, aImageId);
+      }
+      //   resolve()
+      // })
     },
     // 更新当前界面显示
     updateDesc(imageIds) {
@@ -776,7 +754,7 @@ export default {
      * 图像监听事件
      */
     mouseClick(evt) {
-      console.log(evt)
+      console.log(evt);
       // evt.preventDefault();
     },
     mouseWheel(evt) {
@@ -941,9 +919,6 @@ export default {
 };
 </script>
 <style lang="scss">
-$toolsbarColor: #232d58;
-$thumbnail: #0b1336;
-$border: #0f4f60;
 .menu {
   background: #1e3c84 !important;
   padding: 0 !important;
@@ -1005,7 +980,7 @@ $border: #0f4f60;
     display: flex;
     text-align: center;
     flex-direction: row;
-    background: $toolsbarColor;
+    background: #232d58;
     user-select: none;
     .logo {
       flex-shrink: 0;
@@ -1026,7 +1001,7 @@ $border: #0f4f60;
     flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
-    background: $toolsbarColor;
+    background: #232d58;
     position: relative;
     .location {
       display: block;
@@ -1085,7 +1060,7 @@ $border: #0f4f60;
       position: relative;
       width: 100%;
       height: 180px;
-      background: $thumbnail;
+      background: #0b1336;
       overflow-x: auto;
       overflow-y: hidden;
       flex-shrink: 0;
@@ -1117,7 +1092,7 @@ $border: #0f4f60;
         margin: 14px 10px;
         width: 150px;
         height: 140px;
-        border: 1px dashed $border;
+        border: 1px dashed #0f4f60;
         flex-shrink: 0;
         display: flex;
         flex-direction: column;

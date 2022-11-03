@@ -404,11 +404,14 @@ export default {
       cornerstoneTools.toolStyle.setToolWidth(this.toolWidth);
       // 设置tools的线的颜色
       cornerstoneTools.toolColors.setToolColor(this.toolColor);
-      const ScaleOverlayTool = cornerstoneTools.ScaleOverlayTool;
 
       const ZoomTouchPinchTool = cornerstoneTools.ZoomTouchPinchTool;
       cornerstoneTools.addTool(ZoomTouchPinchTool);
       cornerstoneTools.setToolActive("ZoomTouchPinch", {});
+      const OverlayTool = cornerstoneTools.OverlayTool;
+      cornerstoneTools.addTool(OverlayTool);
+      cornerstoneTools.setToolActive("Overlay", {});
+      const ScaleOverlayTool = cornerstoneTools.ScaleOverlayTool;
       cornerstoneTools.addToolForElement(
         element,
         ScaleOverlayTool,

@@ -163,8 +163,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-::v-deep(.van-nav-bar__content) {
+<style lang="scss">
+.van-nav-bar__content {
   background-color: #38b69b;
   .van-icon,
   .van-nav-bar__title,
@@ -172,16 +172,16 @@ export default {
     color: #fff;
   }
 }
-::v-deep(.van-nav-bar) {
+.van-nav-bar {
   background-color: #38b69b;
 }
-::v-deep(.van-dropdown-menu__item:first-child) {
+.van-dropdown-menu__item:first-child {
   background-color: #38b69b;
   .van-dropdown-menu__title {
     color: #ffffff !important;
   }
 }
-::v-deep(.van-search) {
+.van-search {
   background: transparent;
   .van-search__content {
     border-radius: 17px;

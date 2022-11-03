@@ -105,18 +105,18 @@
     </van-popup>
   </div>
 </template>
-<style lang="scss" scoped>
-::v-deep(.van-tabs__wrap) {
+<style lang="scss">
+.van-tabs__wrap {
   padding-bottom: 10px;
 }
-::v-deep(.van-checkbox) {
+.van-checkbox {
   padding: 15px;
 }
-::v-deep(.button-group) {
+.button-group {
   text-align: right;
   .van-button {
-    width: 45%;
-    margin: 2.5%;
+    width: 45% !important;
+    margin: 2.5% !important;
   }
 }
 .text-center {

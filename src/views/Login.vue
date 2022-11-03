@@ -244,37 +244,37 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-::v-deep(.van-tabs__nav) {
+<style lang="scss">
+.van-tabs__nav {
   background: transparent;
 }
-::v-deep(.van-tabs__line) {
-  width: 100px;
+.van-tabs__line {
+  width: 100px !important;
 }
-::v-deep(.van-tab__text--ellipsis) {
-  font-size: 16px;
-  font-weight: 600;
+.van-tab__text--ellipsis {
+  font-size: 16px !important;
+  font-weight: 600 !important;
 }
-::v-deep(.van-button) {
-  font-size: 18px;
-  width: 80%;
-  margin: 10px auto;
-  border: 0px;
-  background-color: #2cb396;
+.van-button {
+  font-size: 18px !important;
+  width: 80% !important;
+  margin: 10px auto !important;
+  border: 0px !important;
+  background-color: #2cb396 !important;
 }
-::v-deep(.van-password-input__item) {
-  font-weight: 600;
-  font-size: 30px;
-  border-radius: 12px;
+.van-password-input__security li {
+  font-weight: 600 !important;
+  font-size: 30px !important;
+  border-radius: 12px !important;
 }
-::v-deep(.van-number-keyboard__header) {
-  font-size: 10px;
-  color: #828284;
+.van-number-keyboard__header {
+  font-size: 10px !important;
+  color: #828284 !important;
 }
-::v-deep(.van-number-keyboard) {
-  background-color: #e7f4f1;
+.van-number-keyboard {
+  background-color: #e7f4f1 !important;
 }
-::v-deep(.van-key__wrapper) {
+.van-key__wrapper {
   .van-key {
     color: #2b383c;
     box-sizing: border-box;

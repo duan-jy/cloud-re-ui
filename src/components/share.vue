@@ -324,23 +324,21 @@ export default {
   },
 };
 </script>
-<style lang="stylus" scoped>
-/deep/ .van-tabs__wrap{
+<style lang="scss">
+.van-tabs__wrap {
   margin-bottom: 10px;
 }
 
 #main {
   padding: 20px;
 
-
-
-  .button-group{
-    margin-top:30px;
+  .button-group {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .button{
+    .button {
       width: 50%;
     }
   }
@@ -354,7 +352,7 @@ export default {
   }
 }
 
-.disclaimer{
-  margin-top:20px;
+.disclaimer {
+  margin-top: 20px;
 }
 </style>
